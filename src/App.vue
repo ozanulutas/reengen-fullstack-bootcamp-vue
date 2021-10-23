@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <h1>2. Hafta - 1. Ders</h1>
+    <h1>2. Hafta - 1. Ders </h1>
 
     <hr>
 
