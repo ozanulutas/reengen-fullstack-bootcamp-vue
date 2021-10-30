@@ -1,11 +1,20 @@
 <template>
   <div class="hello">
-    {{ msg }}
+    <p>
+      {{ $store.state.title }}
+      {{ title }}
+    </p>
+    <div>
+      <input type="number" v-model="value" />
+      <button @click="getNumSum">Get Sum</button>
+    </div>
+    <div>
+      toplam: {{ calNumber }}
+    </div>
   </div>
 </template>
 
 <script>
-
 export default {
   name: "HelloWorld",
   props: {
@@ -13,10 +22,23 @@ export default {
   },
   data() {
     return {
- 
+      value: 0,
     };
   },
- 
+  computed: {
+    // store'un computedden kullanılması daha kullanışlı
+    title() {
+      return this.$store.state.title;
+    },
+    calNumber() {
+      return this.$store.state.number
+    }
+  },
+  methods: {
+    getNumSum() {
+      this.$store.dispatch("getNumber", parseInt(this.value));
+    },
+  },
 };
 </script>
 
