@@ -11,6 +11,12 @@
     <div>
       toplam: {{ calNumber }}
     </div>
+    <div>
+      toplam with plugin: {{ $numberSum(5) }}
+    </div>
+    <div>
+      italic with plugin: <span v-html="$italicaHTML('italic with plugin')"></span>
+    </div>
   </div>
 </template>
 

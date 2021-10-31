@@ -2,7 +2,8 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/search-movie">search movie</router-link> |
+      <router-link to="/chart">chart</router-link> |
+      
     </div>
     <div class="container">
       <router-view/>
@@ -12,7 +13,12 @@
 
 <script>
 export default {
-
+  name: "App",
+  watch: {
+    $route(to, from) {
+      console.log(to, from);
+    }
+  }
 }
 </script>
 

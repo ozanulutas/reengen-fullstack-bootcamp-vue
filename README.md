@@ -3,13 +3,10 @@
 
 # Table of Contents
 
-- [Router](#router)
-
-
-## Router
-
-[Doc](https://router.vuejs.org/)
-
+- Vuex
+- Route Guards
+- Plugins https://learnvue.co/2020/01/how-to-make-your-first-vuejs-plugin/
+- D3 https://masteringjs.io/tutorials/vue/vue-d3
 
 ## Project setup
 ```

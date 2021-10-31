@@ -10,6 +10,8 @@ export default new Vuex.Store({
     number: 0,
     favMovies: [],
     searchResults: [],
+    movieDetails: [],
+    actorDetails: {},
     apiUrl: 'https://imdb8.p.rapidapi.com/',
     headers: {
       'x-rapidapi-host': 'imdb8.p.rapidapi.com',
@@ -37,7 +39,22 @@ export default new Vuex.Store({
           state.favMovies.splice(i, 1)
         } break;
       }
-    }
+    },
+    SET_MOVIE_DETAIL(state, payload) {
+      if(payload.type === "add") {
+        state.movieDetails = payload.data
+      } else if(payload.type === "del") {
+        state.movieDetails = [];
+
+      }
+    },
+    SET_ACTOR_DETAIL(state, payload) {
+      if(payload.type === "add") {
+        state.actorDetails = payload.data
+      } else if(payload.type === "del") {
+        state.actorDetails = [];
+      }
+    },
   },
   actions: {
     getNumber({ commit }, payload) { // mutation commit, action dispatch ile çağırılır
@@ -58,7 +75,30 @@ export default new Vuex.Store({
           commit("SET_MOVIE_SEARCH_RESULT", data)
         })
         .catch(err => console.log(err))
-    }
+    },
+    getMovieDetails({ state, commit }, payload) {
+      return axios.get(`${state.apiUrl}/title/get-details`, {
+        headers: { ...state.headers },
+        params: { tconst: payload.data }
+      })
+        .then(res => {
+          console.log(res.data);
+          commit("SET_MOVIE_DETAIL", {data: res.data, type: "add"})
+        })
+        .catch(err => console.log(err))
+    },
+    getActorDetails({ state, commit }, payload) {
+      return axios.get(`${state.apiUrl}/actors/get-bio`, {
+        headers: { ...state.headers },
+        params: { nconst: payload }
+      })
+        .then(res => {
+          console.log(res.data);
+          commit("SET_ACTOR_DETAIL", {data: res.data, type:"add"})
+          // commit("SET_ACTOR_DETAIL", {data: res.data, type: "add"})
+        })
+        .catch(err => console.log(err))
+    },
   },
   getters: {
     searchTypeMovie: (state) => {
